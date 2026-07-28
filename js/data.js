@@ -193,21 +193,50 @@ window.SITE = {
           effort: "~1 week",
         },
         {
-          slug: "ai-product-management-discipline",
-          name: "AI Product Management Discipline",
+          slug: "ai-product-management",
+          name: "AI Product Management",
           icon: "🧭",
-          status: "planned",
+          status: "progress",
           summary:
-            "An operating discipline for shaping, prioritizing, and owning AI use cases like products.",
+            "A growing suite of product-management accelerators for AI — starting with ready-to-use PRD templates.",
           description:
-            "Brings product-management rigor to AI — defining the roles, artifacts, and cadences (discovery, backlog, prioritization, lifecycle) so AI use cases are owned end to end and evolve based on evidence rather than one-off projects.",
+            "AI Product Management brings product discipline to AI. It is a suite of practical accelerators — templates, frameworks, and playbooks — that help teams shape, prioritize, and own AI use cases as products. We are building it out over time; the first assets are ready-to-use PRD templates you can view and download.",
           deliverables: [
-            "AI product operating model",
-            "Discovery-to-delivery artifacts",
-            "Prioritization & lifecycle cadence",
+            "PRD templates (product & feature)",
+            "Product artifacts and frameworks (growing)",
+            "Reusable, downloadable formats",
           ],
-          inputs: ["Current delivery model", "Stakeholder roles", "Portfolio context"],
-          effort: "2–4 weeks",
+          inputs: ["Use case or product idea", "Stakeholder input"],
+          effort: "Self-serve + facilitated",
+          /* Assets are the accelerators that live INSIDE this suite. Each can
+             have its own page (url). Set status to available/progress/planned. */
+          assets: [
+            {
+              name: "PRD Templates",
+              icon: "📝",
+              status: "available",
+              url: "prd.html",
+              summary: "Two Product Requirements Document templates — one for a product, one for a feature. View, copy, or download.",
+            },
+            {
+              name: "Product Roadmap Template",
+              icon: "🗺️",
+              status: "planned",
+              summary: "A template to shape and communicate the AI product roadmap across horizons.",
+            },
+            {
+              name: "Prioritization Framework",
+              icon: "⚖️",
+              status: "planned",
+              summary: "A framework to prioritize the product backlog by value and effort.",
+            },
+            {
+              name: "Product Metrics Framework",
+              icon: "📈",
+              status: "planned",
+              summary: "Define the metrics that show an AI product is actually working.",
+            },
+          ],
         },
       ],
     },
