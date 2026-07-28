@@ -311,6 +311,29 @@
       })
       .join("");
 
+    // Focus areas (the buckets a pillar is made up of) — optional
+    var focusSection = "";
+    if (p.focusAreas && p.focusAreas.length) {
+      var focusCards = p.focusAreas
+        .map(function (f) {
+          return (
+            '<article class="focus-card reveal">' +
+            '<div class="focus-icon">' + esc(f.icon || "•") + "</div>" +
+            "<h4>" + esc(f.name) + "</h4>" +
+            (f.text ? "<p>" + esc(f.text) + "</p>" : "") +
+            "</article>"
+          );
+        })
+        .join("");
+      focusSection =
+        '<section class="section"><div class="container">' +
+        '<div class="section-head reveal"><span class="eyebrow">What it covers</span>' +
+        "<h2>Key focus areas</h2>" +
+        '<p class="lead">The core areas that make up ' + esc(p.name) + ".</p></div>" +
+        '<div class="focus-grid">' + focusCards + "</div>" +
+        "</div></section>";
+    }
+
     var accels = (p.accelerators || [])
       .map(function (a) {
         return accelCardHTML(p, a);
@@ -336,6 +359,8 @@
       '<div class="panel panel--tint reveal"><h3 style="margin-bottom:18px">Outcomes you can expect</h3>' +
       '<ul class="feature-list">' + outcomes + "</ul></div>" +
       "</div></div></section>" +
+      /* Focus areas (optional) */
+      focusSection +
       /* Approach */
       '<section class="section section--alt"><div class="container">' +
       '<div class="section-head reveal"><span class="eyebrow">Our Approach</span>' +

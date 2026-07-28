@@ -5,12 +5,14 @@
    Almost everything you'll want to change lives in THIS file.
 
    • To edit a pillar's text ............ change "summary", "description", "approach"
+   • To edit a pillar's focus areas ..... change the "focusAreas" list (the
+                                          buckets a pillar is made up of)
    • To add an accelerator .............. copy an existing { ... } block inside
                                           "accelerators" and change the values
    • To change an accelerator's status .. set "status" to one of:
                                           "available", "progress", or "planned"
    • Keep every "slug" UNIQUE and use only lowercase-with-dashes
-     (the slug becomes the page's web address, e.g. ?slug=ai-opportunity-scan)
+     (the slug becomes the page's web address, e.g. ?slug=service-design-framework)
 
    After editing, save the file and refresh the browser. That's it.
    ========================================================================== */
@@ -24,9 +26,9 @@ window.SITE = {
     email: "hello@example.com",
   },
 
-  /* ---- The four capability pillars -------------------------------------- */
+  /* ---- The four pillars of transformation ------------------------------- */
   pillars: [
-    /* ===================== PILLAR 1 ===================== */
+    /* ===================== PILLAR 1 — BUSINESS VALUE DISCOVERY ========== */
     {
       slug: "business-value-discovery",
       name: "Business Value Discovery",
@@ -38,78 +40,171 @@ window.SITE = {
       summary:
         "We start with the business, not the technology. Business Value Discovery uncovers the highest-impact opportunities for AI across your value chain and translates them into a prioritized, evidence-backed opportunity portfolio.",
       description:
-        "Most AI programs stall because they begin with a tool in search of a problem. Business Value Discovery flips that. Working with your leaders and frontline teams, we map the value chain, quantify pain points, and pressure-test where AI can move a metric that matters — revenue, cost, risk, or experience. The output is a shared, defensible view of where to play and why.",
+        "Most AI programs stall because they begin with a tool in search of a problem. Business Value Discovery flips that. Working with your leaders and frontline teams, we anchor on your strategic North Star, benchmark the market, map your value chains, and pressure-test where AI can move a metric that matters — revenue, cost, risk, or experience. The output is a shared, defensible view of where to play and why.",
       outcomes: [
         "A ranked portfolio of AI opportunities tied to business KPIs",
         "Quantified value hypotheses with baseline and target metrics",
         "Executive alignment on ambition, scope, and sequencing",
       ],
+      /* The buckets / key aspects this pillar is made up of */
+      focusAreas: [
+        {
+          name: "Service Design Understanding",
+          icon: "🧩",
+          text: "Map the end-to-end service and experience to reveal where AI can reshape value for customers and the business.",
+        },
+        {
+          name: "Market Analysis & Benchmarking",
+          icon: "🌐",
+          text: "Read the competitive and AI landscape to set ambition against what leading organizations are already doing.",
+        },
+        {
+          name: "Process Mining & Redesign",
+          icon: "🔬",
+          text: "Use event data to see how processes really run, then redesign them around AI-enabled moments.",
+        },
+        {
+          name: "AI Readiness Assessment",
+          icon: "📶",
+          text: "Gauge data, technology, talent, and organizational readiness to act on AI opportunities.",
+        },
+        {
+          name: "Business KPI Benchmarking",
+          icon: "📊",
+          text: "Establish the baseline metrics that define value and make the impact of AI measurable.",
+        },
+        {
+          name: "AI Product Management",
+          icon: "🧭",
+          text: "Bring product discipline to shaping, prioritizing, and owning AI use cases end to end.",
+        },
+      ],
+      /* The five-step approach for this pillar */
       approach: [
         {
-          title: "Frame",
-          text: "Align on strategic objectives, value drivers, and the metrics that define success.",
+          title: "Anchor on your North Star",
+          text: "Align on the strategic objectives and value drivers that every opportunity must tie back to.",
         },
         {
-          title: "Explore",
-          text: "Run structured discovery across functions to surface pain points and AI-eligible moments.",
+          title: "Benchmark the market",
+          text: "Understand what leaders are doing and where the bar for 'good' really sits.",
         },
         {
-          title: "Quantify",
-          text: "Size the value of each opportunity with a transparent, assumption-driven model.",
+          title: "Map the value chains",
+          text: "Lay out the end-to-end value chains to see where value is created, lost, and unlocked.",
         },
         {
-          title: "Shortlist",
-          text: "Converge on a defensible portfolio of opportunities ready for prioritization.",
+          title: "Target impactful processes",
+          text: "Focus on the processes where AI can move the metrics that matter most.",
+        },
+        {
+          title: "Shape transformative use cases",
+          text: "Turn targeted opportunities into well-defined, high-value AI use cases ready to prioritize.",
         },
       ],
       accelerators: [
         {
-          slug: "ai-opportunity-scan",
-          name: "AI Opportunity Scan",
-          icon: "🔍",
-          status: "available",
-          summary:
-            "A structured framework to rapidly map AI opportunities across a function or value chain.",
-          description:
-            "The AI Opportunity Scan gives teams a repeatable way to inventory candidate use cases, score them against value and effort, and produce a heat-mapped view of where AI can create the most impact — in days, not months.",
-          deliverables: [
-            "Value-chain opportunity heat map",
-            "Use-case inventory with initial value/effort scoring",
-            "Executive-ready opportunity summary",
-          ],
-          inputs: ["Process/value-chain overview", "Key business KPIs", "SME availability for discovery"],
-          effort: "1–2 weeks",
-        },
-        {
-          slug: "value-hypothesis-canvas",
-          name: "Value Hypothesis Canvas",
-          icon: "🧭",
+          slug: "service-design-framework",
+          name: "Service Design Framework",
+          icon: "🧩",
           status: "progress",
           summary:
-            "A one-page canvas to articulate and test the value hypothesis behind each AI use case.",
+            "A structured framework for mapping the end-to-end service and spotting where AI reshapes value.",
           description:
-            "For each candidate use case, the canvas captures the problem, the intended intervention, the value mechanism, baseline and target metrics, and the assumptions that must hold true — creating a shared, testable definition of success before a line of code is written.",
-          deliverables: ["Per-use-case value canvas", "Assumption & risk log", "Baseline/target metric definitions"],
-          inputs: ["Shortlisted use cases", "Access to relevant KPI data"],
-          effort: "3–5 days per use case",
+            "The Service Design Framework brings a customer- and service-centric lens to opportunity discovery. It maps actors, touchpoints, journeys, and the processes beneath them so teams can see the whole service system and pinpoint the moments where AI can transform experience, efficiency, and value.",
+          deliverables: [
+            "Service blueprint & journey maps",
+            "Pain-point and opportunity overlay",
+            "Prioritized AI intervention points",
+          ],
+          inputs: ["Service / process overview", "CX and operations SME access", "Existing journey or process docs"],
+          effort: "2–3 weeks",
         },
         {
-          slug: "ai-business-case-model",
-          name: "AI Business Case Model",
+          slug: "business-process-mining-approach",
+          name: "Business Process Mining Approach",
+          icon: "🔬",
+          status: "progress",
+          summary:
+            "A data-driven approach to reveal how processes actually run and redesign them around AI.",
+          description:
+            "Rather than relying on how a process is assumed to work, the Process Mining Approach uses event-log data to reconstruct the real flow — surfacing bottlenecks, rework, and variants. That evidence base drives targeted redesign around AI-enabled steps.",
+          deliverables: [
+            "Process discovery & conformance analysis",
+            "Bottleneck and variant heat map",
+            "AI-enabled redesign recommendations",
+          ],
+          inputs: ["Event-log / system data", "Process scope", "Data access & owners"],
+          effort: "3–5 weeks",
+        },
+        {
+          slug: "business-kpi-benchmarks",
+          name: "Business KPI Benchmarks",
           icon: "📊",
           status: "planned",
           summary:
-            "A financial model that turns value hypotheses into a defensible ROI and investment case.",
+            "A reference set of business KPIs and benchmarks to baseline value and measure impact.",
           description:
-            "A configurable model that projects costs, benefits, ramp curves, and sensitivities for an AI initiative — giving finance and leadership a transparent basis for investment decisions.",
-          deliverables: ["ROI / NPV model", "Cost & benefit driver breakdown", "Sensitivity analysis"],
-          inputs: ["Validated value hypotheses", "Cost assumptions", "Adoption estimates"],
+            "A curated library of the KPIs that matter by function and industry, with benchmark ranges — giving teams a fast, credible way to baseline current performance and define the targets AI initiatives will be measured against.",
+          deliverables: [
+            "KPI library by function",
+            "Benchmark reference ranges",
+            "Baseline-vs-target definition sheet",
+          ],
+          inputs: ["Function / industry context", "Access to current performance data"],
           effort: "1–2 weeks",
+        },
+        {
+          slug: "ai-readiness-assessment",
+          name: "AI Readiness Assessment",
+          icon: "📶",
+          status: "planned",
+          summary:
+            "A diagnostic of data, technology, talent, and organizational readiness to pursue AI.",
+          description:
+            "The AI Readiness Assessment scores the organization across the dimensions that determine whether AI opportunities can actually be delivered — data, platform, skills, governance, and change capacity — and produces a clear readiness profile with gaps and next steps.",
+          deliverables: [
+            "Multi-dimension readiness scorecard",
+            "Gap analysis",
+            "Prioritized readiness roadmap",
+          ],
+          inputs: ["Stakeholder interviews", "Data & platform overview", "Organizational context"],
+          effort: "2–3 weeks",
+        },
+        {
+          slug: "business-case-template",
+          name: "Business Case Template",
+          icon: "🧾",
+          status: "planned",
+          summary:
+            "A ready-to-use template to turn AI opportunities into a defensible business case.",
+          description:
+            "A structured template and model that captures costs, benefits, assumptions, and risks for an AI initiative — producing a consistent, finance-ready business case that leadership can compare and trust.",
+          deliverables: ["Business case template", "Cost / benefit model", "Assumptions & risk log"],
+          inputs: ["Opportunity definition", "Cost & benefit inputs", "Adoption estimates"],
+          effort: "~1 week",
+        },
+        {
+          slug: "ai-product-management-discipline",
+          name: "AI Product Management Discipline",
+          icon: "🧭",
+          status: "planned",
+          summary:
+            "An operating discipline for shaping, prioritizing, and owning AI use cases like products.",
+          description:
+            "Brings product-management rigor to AI — defining the roles, artifacts, and cadences (discovery, backlog, prioritization, lifecycle) so AI use cases are owned end to end and evolve based on evidence rather than one-off projects.",
+          deliverables: [
+            "AI product operating model",
+            "Discovery-to-delivery artifacts",
+            "Prioritization & lifecycle cadence",
+          ],
+          inputs: ["Current delivery model", "Stakeholder roles", "Portfolio context"],
+          effort: "2–4 weeks",
         },
       ],
     },
 
-    /* ===================== PILLAR 2 ===================== */
+    /* ===================== PILLAR 2 — TECHNOLOGY VALUE DELIVERY ========= */
     {
       slug: "technology-value-delivery",
       name: "Technology Value Delivery",
@@ -201,23 +296,36 @@ window.SITE = {
       ],
     },
 
-    /* ===================== PILLAR 3 ===================== */
+    /* ===================== PILLAR 3 — GOVERNANCE ======================== */
     {
       slug: "governance",
-      name: "Governance & AICC",
+      name: "Governance",
       short: "Govern AI responsibly and build lasting internal capability.",
       icon: "🛡️",
       color: "#f5a623",
       tint: "#fdf1dd",
       glow: "rgba(245,166,35,0.26)",
       summary:
-        "Governance covers two intertwined disciplines: the program governance that keeps AI initiatives on track, and the AI Center of Competence (AICC) that builds durable internal capability, standards, and responsible-AI guardrails.",
+        "Governance spans two intertwined arms: the Enterprise Governance Program that keeps AI initiatives aligned, controlled, and compliant, and the AI Competency Center (AICC) that builds durable internal capability, standards, and reusable assets.",
       description:
-        "AI at scale needs more than projects — it needs an operating model. This pillar establishes program governance to steer the portfolio, and stands up an AI Center of Competence (AICC) as the home for standards, reusable assets, talent, and responsible-AI practices. Together they turn AI from a series of experiments into a governed, compounding capability.",
+        "AI at scale needs more than projects — it needs an operating model. This pillar establishes an enterprise governance program to steer the portfolio with the right decision rights and controls, and stands up an AI Competency Center (AICC) as the home for standards, reusable assets, talent, and responsible-AI practices. Together they turn AI from a series of experiments into a governed, compounding capability.",
       outcomes: [
         "A clear governance operating model and decision rights",
-        "A functioning AI Center of Competence (AICC)",
+        "A functioning AI Competency Center (AICC)",
         "Responsible-AI guardrails embedded in delivery",
+      ],
+      /* The two arms that make up Governance */
+      focusAreas: [
+        {
+          name: "Enterprise Governance Program",
+          icon: "🏛️",
+          text: "Establish the bodies, decision rights, standards, and controls that keep AI initiatives aligned, funded, and compliant across the enterprise.",
+        },
+        {
+          name: "AI Competency Center (AICC)",
+          icon: "🎓",
+          text: "Build a central home for AI talent, reusable assets, and standards that scales capability and consistency across teams.",
+        },
       ],
       approach: [
         {
@@ -244,9 +352,9 @@ window.SITE = {
           icon: "🏛️",
           status: "available",
           summary:
-            "A blueprint for standing up and running an AI Center of Competence.",
+            "A blueprint for standing up and running an AI Competency Center.",
           description:
-            "Defines the mandate, structure, roles, funding model, and service catalog of an AI Center of Competence — the organizational engine that scales AI capability across the enterprise.",
+            "Defines the mandate, structure, roles, funding model, and service catalog of an AI Competency Center — the organizational engine that scales AI capability across the enterprise.",
           deliverables: ["AICC operating model", "Roles & RACI", "Service catalog & funding model"],
           inputs: ["Org context & ambition", "Existing capability inventory", "Stakeholder input"],
           effort: "2–4 weeks",
@@ -280,40 +388,40 @@ window.SITE = {
       ],
     },
 
-    /* ===================== PILLAR 4 ===================== */
+    /* ===================== PILLAR 4 — VALUE REALIZATION & ECONOMICS ===== */
     {
-      slug: "value-based-prioritization",
-      name: "Value-Based Prioritization",
-      short: "Sequence the portfolio to maximize value and momentum.",
+      slug: "value-realization-economics",
+      name: "Value Realization & Economics",
+      short: "Prioritize, capture, and prove the economic value AI delivers.",
       icon: "📈",
       color: "#8b5cf6",
       tint: "#f0ebfe",
       glow: "rgba(139,92,246,0.26)",
       summary:
-        "Value-Based Prioritization is the connective tissue between the pillars. It brings discipline to sequencing — balancing value, feasibility, and risk to build a roadmap that delivers early wins and compounding impact.",
+        "Value Realization & Economics makes AI accountable for outcomes. It brings economic discipline to prioritize investment, track promised versus realized value, and prove the return on the AI portfolio.",
       description:
-        "With a portfolio of opportunities in hand, the hardest question is what to do first. Value-Based Prioritization applies a transparent, multi-criteria approach to rank and sequence initiatives — weighing value, feasibility, risk, and strategic fit — so investment flows to what matters and momentum builds behind visible wins.",
+        "AI only matters if it delivers value the business can see. This pillar establishes the economic frame — prioritizing initiatives on value and feasibility, modeling costs and benefits, and tracking benefits realization — so leadership can invest with confidence and continuously double down on what works.",
       outcomes: [
-        "A transparent, defensible prioritization of initiatives",
-        "A sequenced roadmap balancing quick wins and big bets",
-        "A repeatable model for ongoing portfolio decisions",
+        "A transparent basis for AI investment decisions",
+        "Clear tracking of promised vs. realized value",
+        "A defensible view of AI portfolio ROI",
       ],
       approach: [
         {
-          title: "Define",
-          text: "Agree the criteria and weights that reflect your strategy and constraints.",
+          title: "Define value",
+          text: "Agree the criteria, weights, and metrics that reflect your strategy and constraints.",
         },
         {
-          title: "Score",
-          text: "Assess each initiative consistently against value, feasibility, and risk.",
+          title: "Model the economics",
+          text: "Size the costs, benefits, and returns of each initiative with a transparent model.",
         },
         {
-          title: "Sequence",
-          text: "Build a roadmap that balances quick wins with foundational investments.",
+          title: "Prioritize & sequence",
+          text: "Rank and sequence initiatives to balance quick wins with foundational bets.",
         },
         {
-          title: "Revisit",
-          text: "Re-prioritize on a cadence as evidence and conditions evolve.",
+          title: "Track & realize",
+          text: "Monitor realized value against the business case and course-correct as evidence lands.",
         },
       ],
       accelerators: [
