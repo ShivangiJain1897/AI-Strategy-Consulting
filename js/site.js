@@ -273,6 +273,23 @@
     if (!list || !list.length) return "";
     return '<div class="accel-grid">' + list.map(accelCardHTML).join("") + "</div>";
   }
+  // An "asset" is an accelerator that lives inside a suite accelerator (e.g. PRD
+  // inside AI Product Management). Linkable ones open their own page.
+  function assetCardHTML(x) {
+    var linkable = x.url && x.status !== "planned";
+    return (
+      '<article class="accel-card reveal' + (linkable ? "" : " is-muted") + '">' +
+      '<div class="accel-top"><div class="accel-icon">' + esc(x.icon || "•") + "</div>" +
+      statusBadge(x.status) + "</div>" +
+      "<h4>" + esc(x.name) + "</h4>" +
+      "<p>" + esc(x.summary || "") + "</p>" +
+      (linkable
+        ? '<div class="accel-foot">Open &rarr;</div>' +
+          '<a class="card-link-cover" href="' + ROOT + esc(x.url) + '">' + esc(x.name) + "</a>"
+        : '<div class="accel-foot" style="color:var(--slate-500)">Coming soon</div>') +
+      "</article>"
+    );
+  }
   function subHeading(eyebrow, title, lead, color) {
     return (
       '<div class="sub-head reveal">' +
@@ -530,6 +547,15 @@
       "</ul></div>" +
       "</div>" +
       "</div></div></section>" +
+      (a.assets && a.assets.length
+        ? '<section class="section section--alt"><div class="container">' +
+          '<div class="section-head reveal"><span class="eyebrow">Inside this accelerator</span>' +
+          "<h2>Accelerators in this suite</h2>" +
+          '<p class="lead">' + esc(a.name) +
+          " is a growing suite. Each item below is being built into a working asset over time — open the ones that are ready.</p></div>" +
+          '<div class="accel-grid">' + a.assets.map(assetCardHTML).join("") + "</div>" +
+          "</div></section>"
+        : "") +
       relatedAccelHTML(sp || p, a) +
       '<section class="section"><div class="container">' + ctaBandHTML() + "</div></section>";
 
