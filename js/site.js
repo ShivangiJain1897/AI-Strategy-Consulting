@@ -188,14 +188,41 @@
   }
 
   /* ---- Reusable card renderers ------------------------------------------ */
+  // The short names of a pillar's focus areas (for the home-page cards).
+  // Standard pillars use their focusAreas; Governance uses its sub-area names.
+  function pillarFocusNames(p) {
+    if (p.focusAreas && p.focusAreas.length) {
+      return p.focusAreas.map(function (f) {
+        return f.name;
+      });
+    }
+    if (p.subPillars && p.subPillars.length) {
+      return p.subPillars.map(function (s) {
+        return s.name;
+      });
+    }
+    return [];
+  }
+
   function pillarCardHTML(p) {
     var count = pillarAccelerators(p).length;
+    var names = pillarFocusNames(p);
+    var tags = names.length
+      ? '<div class="pillar-tags">' +
+        names
+          .map(function (n) {
+            return '<span class="pillar-tag-sm">' + esc(n) + "</span>";
+          })
+          .join("") +
+        "</div>"
+      : "";
     return (
       '<article class="pillar-card reveal" style="--pillar-color:' + esc(p.color) +
       ";--pillar-tint:" + esc(p.tint) + '">' +
       '<div class="pillar-icon">' + esc(p.icon) + "</div>" +
       "<h3>" + esc(p.name) + "</h3>" +
       "<p>" + esc(p.summary) + "</p>" +
+      tags +
       '<div class="pillar-meta"><span>' + count + " accelerators</span>" +
       '<span class="arrow">Explore &rarr;</span></div>' +
       '<a class="card-link-cover" href="' + ROOT + "pillar.html?slug=" + esc(p.slug) + '">' +
@@ -380,10 +407,6 @@
             inner += subHeading("The business value", "Why " + sp.name + " matters", null, p.color) +
               valueGridHTML(sp.businessValue, p.color) + '<div style="height:44px"></div>';
           }
-          if (sp.focusAreas) {
-            inner += subHeading("What it covers", "Key focus areas", null, p.color) +
-              focusGridHTML(sp.focusAreas) + '<div style="height:44px"></div>';
-          }
           if (sp.approach) {
             inner += subHeading("Our approach", "How we deliver " + sp.name, null, p.color) +
               stepsHTML(sp.approach) + '<div style="height:44px"></div>';
@@ -409,19 +432,10 @@
       var sections = "";
       if (p.businessValue) {
         sections +=
-          '<section class="section"><div class="container">' +
+          '<section class="section section--alt"><div class="container">' +
           '<div class="section-head reveal"><span class="eyebrow">The business value</span>' +
           "<h2>Why this pillar matters</h2></div>" +
           valueGridHTML(p.businessValue, p.color) +
-          "</div></section>";
-      }
-      if (p.focusAreas) {
-        sections +=
-          '<section class="section section--alt"><div class="container">' +
-          '<div class="section-head reveal"><span class="eyebrow">What it covers</span>' +
-          "<h2>Key focus areas</h2>" +
-          '<p class="lead">The core areas that make up ' + esc(p.name) + ".</p></div>" +
-          focusGridHTML(p.focusAreas) +
           "</div></section>";
       }
       if (p.approach) {
