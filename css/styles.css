@@ -733,6 +733,48 @@ p {
   margin: 0;
 }
 
+/* Business-value grid (short value themes with a one-liner) */
+.value-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+.value-item {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+.value-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+.value-item strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 2px;
+}
+.value-item span {
+  font-size: 0.9rem;
+  color: var(--slate-700);
+}
+
+/* Sub-section heading used inside sub-pillar blocks */
+.sub-head {
+  margin: 0 0 22px;
+}
+.sub-head h3 {
+  font-size: 1.35rem;
+  margin: 4px 0 0;
+}
+
 /* ---- 10. Page hero (interior pages) ------------------------------------ */
 .page-hero {
   background: linear-gradient(180deg, var(--navy-900), var(--navy-800));
