@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact — AI Strategy Studio</title>
+    <meta name="description" content="Get in touch about AI strategy, delivery, governance, and prioritization." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header" data-site-header></header>
+    <main>
+      <header class="page-hero">
+        <div class="container">
+          <nav class="breadcrumbs">
+            <a href="index.html">Home</a><span class="sep">/</span><span>Contact</span>
+          </nav>
+          <span class="pill-tag">✉️ Contact</span>
+          <h1>Start a conversation</h1>
+          <p class="lead">
+            Tell us where you are on your AI journey and what you're trying to
+            achieve. We'll come back with how our capabilities and accelerators
+            can help.
+          </p>
+        </div>
+      </header>
+
+      <section class="section">
+        <div class="container">
+          <div class="grid-2">
+            <div class="reveal">
+              <span class="eyebrow">Get in touch</span>
+              <h2>We'd love to hear from you</h2>
+              <p class="lead">
+                This is a showcase site, so the form below is a starting point.
+                Replace it with your real contact details or a form provider when
+                you're ready.
+              </p>
+              <ul class="meta-list" style="margin-top:24px">
+                <li><span class="k">Email</span><span class="v" data-contact-email>hello@example.com</span></li>
+                <li><span class="k">Focus</span><span class="v">AI strategy &amp; GTM</span></li>
+                <li><span class="k">Engagements</span><span class="v">Discovery to scale</span></li>
+              </ul>
+            </div>
+
+            <!-- NOTE: This form is a visual placeholder. To make it actually send,
+                 connect it to a form service (e.g. Formspree) by setting the
+                 action attribute. For now it just shows a friendly message. -->
+            <form class="panel reveal" data-contact-form>
+              <h3 style="margin-bottom:18px">Send a message</h3>
+              <div style="display:grid;gap:16px">
+                <label style="display:grid;gap:6px;font-size:0.9rem;font-weight:600">
+                  Name
+                  <input required name="name" type="text" placeholder="Your name"
+                    style="padding:12px 14px;border:1px solid var(--line);border-radius:10px;font:inherit" />
+                </label>
+                <label style="display:grid;gap:6px;font-size:0.9rem;font-weight:600">
+                  Email
+                  <input required name="email" type="email" placeholder="you@company.com"
+                    style="padding:12px 14px;border:1px solid var(--line);border-radius:10px;font:inherit" />
+                </label>
+                <label style="display:grid;gap:6px;font-size:0.9rem;font-weight:600">
+                  How can we help?
+                  <textarea required name="message" rows="5" placeholder="Tell us about your goals…"
+                    style="padding:12px 14px;border:1px solid var(--line);border-radius:10px;font:inherit;resize:vertical"></textarea>
+                </label>
+                <button class="btn btn--primary" type="submit">Send message</button>
+                <p data-form-note style="font-size:0.85rem;color:var(--slate-500);margin:0"></p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer" data-site-footer></footer>
+    <script src="js/data.js"></script>
+    <script src="js/site.js"></script>
+    <script>
+      // Fill contact email from data.js, and give the placeholder form friendly behavior.
+      (function () {
+        var email = (window.SITE && window.SITE.brand && window.SITE.brand.email) || "hello@example.com";
+        var slot = document.querySelector("[data-contact-email]");
+        if (slot) slot.textContent = email;
+        var form = document.querySelector("[data-contact-form]");
+        var note = document.querySelector("[data-form-note]");
+        if (form) {
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            if (note)
+              note.textContent =
+                "Thanks! This demo form isn't connected yet — connect it to a form service (e.g. Formspree) to receive messages.";
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
