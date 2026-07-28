@@ -7,6 +7,7 @@
   "use strict";
 
   var SITE = window.SITE || { brand: {}, pillars: [] };
+  var ROOT = "";
 
   /* ---- Small helpers ---------------------------------------------------- */
   function esc(s) {
@@ -24,12 +25,27 @@
       return p.slug === slug;
     })[0];
   }
+  // A pillar may hold accelerators directly, or inside sub-pillars (e.g. Governance).
+  function pillarAccelerators(p) {
+    if (p.subPillars && p.subPillars.length) {
+      return p.subPillars.reduce(function (acc, sp) {
+        return acc.concat(sp.accelerators || []);
+      }, []);
+    }
+    return p.accelerators || [];
+  }
   function findAccelerator(slug) {
     for (var i = 0; i < SITE.pillars.length; i++) {
-      var accs = SITE.pillars[i].accelerators || [];
-      for (var j = 0; j < accs.length; j++) {
-        if (accs[j].slug === slug) {
-          return { pillar: SITE.pillars[i], accel: accs[j] };
+      var p = SITE.pillars[i];
+      var direct = p.accelerators || [];
+      for (var j = 0; j < direct.length; j++) {
+        if (direct[j].slug === slug) return { pillar: p, subPillar: null, accel: direct[j] };
+      }
+      var subs = p.subPillars || [];
+      for (var k = 0; k < subs.length; k++) {
+        var sa = subs[k].accelerators || [];
+        for (var m = 0; m < sa.length; m++) {
+          if (sa[m].slug === slug) return { pillar: p, subPillar: subs[k], accel: sa[m] };
         }
       }
     }
@@ -45,10 +61,6 @@
     return '<span class="badge ' + s.cls + '"><span class="dot"></span>' + s.label + "</span>";
   }
 
-  /* Base path helper: pages live at site root, so links are relative to root.
-     We detect if we're in a subfolder (we aren't in this design) — kept simple. */
-  var ROOT = "";
-
   /* ---- Universal navigation --------------------------------------------- */
   function buildHeader() {
     var mount = document.querySelector("[data-site-header]");
@@ -57,17 +69,9 @@
     var dropdown = SITE.pillars
       .map(function (p) {
         return (
-          '<li><a href="' +
-          ROOT +
-          "pillar.html?slug=" +
-          esc(p.slug) +
-          '"><strong>' +
-          esc(p.icon) +
-          "  " +
-          esc(p.name) +
-          "</strong><span>" +
-          esc(p.short) +
-          "</span></a></li>"
+          '<li><a href="' + ROOT + "pillar.html?slug=" + esc(p.slug) + '">' +
+          "<strong>" + esc(p.icon) + "  " + esc(p.name) + "</strong>" +
+          "<span>" + esc(p.short) + "</span></a></li>"
         );
       })
       .join("");
@@ -94,7 +98,6 @@
       "</div>" +
       "</nav></div>";
 
-    // Mobile toggle
     var toggle = mount.querySelector(".nav-toggle");
     var links = mount.querySelector(".nav-links");
     toggle.addEventListener("click", function () {
@@ -102,7 +105,6 @@
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
     });
 
-    // Highlight current page
     var here = (location.pathname.split("/").pop() || "index.html").toLowerCase();
     mount.querySelectorAll(".nav-link").forEach(function (a) {
       var href = (a.getAttribute("href") || "").toLowerCase();
@@ -120,7 +122,6 @@
         return '<li><a href="' + ROOT + "pillar.html?slug=" + esc(p.slug) + '">' + esc(p.name) + "</a></li>";
       })
       .join("");
-    var year = document.currentScript ? "" : ""; // year filled below without Date restrictions
 
     mount.innerHTML =
       '<div class="container">' +
@@ -146,9 +147,7 @@
       "</ul></div>" +
       "</div>" +
       '<div class="footer-bottom">' +
-      "<span>&copy; " +
-      esc(b.name || "AI Strategy Studio") +
-      ". Illustrative GTM showcase.</span>" +
+      "<span>&copy; " + esc(b.name || "AI Strategy Studio") + ". Illustrative GTM showcase.</span>" +
       "<span>Built as a living asset — accelerators ship over time.</span>" +
       "</div>" +
       "</div>";
@@ -181,8 +180,6 @@
 
     // Safety net: never leave content permanently hidden if the observer
     // doesn't fire (unusual browsers, capture tools, programmatic scrolling).
-    // Below-the-fold elements aren't visible yet, so forcing them shown causes
-    // no flash — it only guarantees content is there when the user scrolls to it.
     window.setTimeout(function () {
       document.querySelectorAll(".reveal:not(.is-visible)").forEach(function (el) {
         el.classList.add("is-visible");
@@ -190,15 +187,12 @@
     }, 1600);
   }
 
-  /* ---- Renderers reused across pages ------------------------------------ */
+  /* ---- Reusable card renderers ------------------------------------------ */
   function pillarCardHTML(p) {
-    var count = (p.accelerators || []).length;
+    var count = pillarAccelerators(p).length;
     return (
-      '<article class="pillar-card reveal" style="--pillar-color:' +
-      esc(p.color) +
-      ";--pillar-tint:" +
-      esc(p.tint) +
-      '">' +
+      '<article class="pillar-card reveal" style="--pillar-color:' + esc(p.color) +
+      ";--pillar-tint:" + esc(p.tint) + '">' +
       '<div class="pillar-icon">' + esc(p.icon) + "</div>" +
       "<h3>" + esc(p.name) + "</h3>" +
       "<p>" + esc(p.summary) + "</p>" +
@@ -210,7 +204,7 @@
     );
   }
 
-  function accelCardHTML(p, a) {
+  function accelCardHTML(a) {
     return (
       '<article class="accel-card reveal">' +
       '<div class="accel-top">' +
@@ -226,7 +220,70 @@
     );
   }
 
-  /* ---- Home: render pillar grid ----------------------------------------- */
+  /* ---- Content-block renderers (reused by pillars & sub-pillars) --------- */
+  function valueGridHTML(list, color) {
+    if (!list || !list.length) return "";
+    return (
+      '<div class="value-grid">' +
+      list
+        .map(function (v) {
+          return (
+            '<div class="value-item reveal">' +
+            '<span class="value-dot" style="background:' + esc(color || "#4f60ff") + '"></span>' +
+            "<div><strong>" + esc(v.title) + "</strong>" +
+            (v.text ? "<span>" + esc(v.text) + "</span>" : "") +
+            "</div></div>"
+          );
+        })
+        .join("") +
+      "</div>"
+    );
+  }
+  function focusGridHTML(list) {
+    if (!list || !list.length) return "";
+    return (
+      '<div class="focus-grid">' +
+      list
+        .map(function (f) {
+          return (
+            '<article class="focus-card reveal">' +
+            '<div class="focus-icon">' + esc(f.icon || "•") + "</div>" +
+            "<h4>" + esc(f.name) + "</h4>" +
+            (f.text ? "<p>" + esc(f.text) + "</p>" : "") +
+            "</article>"
+          );
+        })
+        .join("") +
+      "</div>"
+    );
+  }
+  function stepsHTML(list) {
+    if (!list || !list.length) return "";
+    return (
+      '<div class="steps">' +
+      list
+        .map(function (s) {
+          return '<div class="step reveal"><h4>' + esc(s.title) + "</h4><p>" + esc(s.text) + "</p></div>";
+        })
+        .join("") +
+      "</div>"
+    );
+  }
+  function accelGridHTML(list) {
+    if (!list || !list.length) return "";
+    return '<div class="accel-grid">' + list.map(accelCardHTML).join("") + "</div>";
+  }
+  function subHeading(eyebrow, title, lead, color) {
+    return (
+      '<div class="sub-head reveal">' +
+      (eyebrow ? '<span class="eyebrow"' + (color ? ' style="color:' + esc(color) + '"' : "") + ">" + esc(eyebrow) + "</span>" : "") +
+      (title ? "<h3>" + esc(title) + "</h3>" : "") +
+      (lead ? '<p class="lead">' + esc(lead) + "</p>" : "") +
+      "</div>"
+    );
+  }
+
+  /* ---- Home / methodology: render pillar grid --------------------------- */
   function renderHomePillars() {
     var mount = document.querySelector("[data-pillar-grid]");
     if (!mount) return;
@@ -239,18 +296,13 @@
     if (!mount) return;
     mount.innerHTML = SITE.pillars
       .map(function (p) {
-        var accs = (p.accelerators || [])
-          .map(function (a) {
-            return accelCardHTML(p, a);
-          })
-          .join("");
         return (
           '<div class="section-head reveal" style="margin-bottom:28px">' +
           '<span class="eyebrow" style="color:' + esc(p.color) + '">' + esc(p.icon) + " " + esc(p.name) + "</span>" +
-          "<p class=\"lead\">" + esc(p.summary) + "</p>" +
+          '<p class="lead">' + esc(p.summary) + "</p>" +
           '<a class="btn btn--light btn--sm" href="' + ROOT + "pillar.html?slug=" + esc(p.slug) + '">Open pillar &rarr;</a>' +
           "</div>" +
-          '<div class="accel-grid" style="margin-bottom:64px">' + accs + "</div>"
+          '<div style="margin-bottom:64px">' + accelGridHTML(pillarAccelerators(p)) + "</div>"
         );
       })
       .join("");
@@ -260,21 +312,16 @@
   function renderAcceleratorLibrary() {
     var mount = document.querySelector("[data-accel-library]");
     if (!mount) return;
-    var cards = [];
+    var all = [];
     SITE.pillars.forEach(function (p) {
-      (p.accelerators || []).forEach(function (a) {
-        cards.push(accelCardHTML(p, a));
-      });
+      all = all.concat(pillarAccelerators(p));
     });
-    mount.innerHTML = '<div class="accel-grid">' + cards.join("") + "</div>";
+    mount.innerHTML = accelGridHTML(all);
 
-    // Simple counts
     var counts = { available: 0, progress: 0, planned: 0, total: 0 };
-    SITE.pillars.forEach(function (p) {
-      (p.accelerators || []).forEach(function (a) {
-        counts.total++;
-        counts[a.status] = (counts[a.status] || 0) + 1;
-      });
+    all.forEach(function (a) {
+      counts.total++;
+      counts[a.status] = (counts[a.status] || 0) + 1;
     });
     var stat = document.querySelector("[data-accel-counts]");
     if (stat) {
@@ -299,49 +346,87 @@
     }
     document.title = p.name + " — " + (SITE.brand.name || "AI Strategy");
 
-    var approach = (p.approach || [])
-      .map(function (s) {
-        return '<div class="step reveal"><h4>' + esc(s.title) + "</h4><p>" + esc(s.text) + "</p></div>";
-      })
-      .join("");
-
     var outcomes = (p.outcomes || [])
       .map(function (o) {
         return '<li><span class="check">✓</span><span><span>' + esc(o) + "</span></span></li>";
       })
       .join("");
 
-    // Focus areas (the buckets a pillar is made up of) — optional
-    var focusSection = "";
-    if (p.focusAreas && p.focusAreas.length) {
-      var focusCards = p.focusAreas
-        .map(function (f) {
+    var body;
+    if (p.subPillars && p.subPillars.length) {
+      // Governance-style pillar: render each sub-area as its own grouped section.
+      body = p.subPillars
+        .map(function (sp, idx) {
+          var altCls = idx % 2 === 1 ? " section--alt" : "";
+          var inner = "";
+          if (sp.businessValue) {
+            inner += subHeading("The business value", "Why " + sp.name + " matters", null, p.color) +
+              valueGridHTML(sp.businessValue, p.color) + '<div style="height:44px"></div>';
+          }
+          if (sp.focusAreas) {
+            inner += subHeading("What it covers", "Key focus areas", null, p.color) +
+              focusGridHTML(sp.focusAreas) + '<div style="height:44px"></div>';
+          }
+          if (sp.approach) {
+            inner += subHeading("Our approach", "How we deliver " + sp.name, null, p.color) +
+              stepsHTML(sp.approach) + '<div style="height:44px"></div>';
+          }
+          if (sp.accelerators) {
+            inner += subHeading("Accelerators", "Assets that speed up delivery", null, p.color) +
+              accelGridHTML(sp.accelerators);
+          }
           return (
-            '<article class="focus-card reveal">' +
-            '<div class="focus-icon">' + esc(f.icon || "•") + "</div>" +
-            "<h4>" + esc(f.name) + "</h4>" +
-            (f.text ? "<p>" + esc(f.text) + "</p>" : "") +
-            "</article>"
+            '<section class="section' + altCls + '"><div class="container">' +
+            '<div class="section-head reveal" style="max-width:820px">' +
+            '<span class="pill-tag" style="background:' + esc(p.tint) + ';color:' + esc(p.color) +
+            ';border-color:transparent">' + esc(sp.icon || p.icon) + "  " + esc(sp.name) + "</span>" +
+            "<h2>" + esc(sp.name) + "</h2>" +
+            (sp.summary ? '<p class="lead">' + esc(sp.summary) + "</p>" : "") +
+            "</div>" + inner +
+            "</div></section>"
           );
         })
         .join("");
-      focusSection =
-        '<section class="section"><div class="container">' +
-        '<div class="section-head reveal"><span class="eyebrow">What it covers</span>' +
-        "<h2>Key focus areas</h2>" +
-        '<p class="lead">The core areas that make up ' + esc(p.name) + ".</p></div>" +
-        '<div class="focus-grid">' + focusCards + "</div>" +
+    } else {
+      // Standard pillar.
+      var sections = "";
+      if (p.businessValue) {
+        sections +=
+          '<section class="section"><div class="container">' +
+          '<div class="section-head reveal"><span class="eyebrow">The business value</span>' +
+          "<h2>Why this pillar matters</h2></div>" +
+          valueGridHTML(p.businessValue, p.color) +
+          "</div></section>";
+      }
+      if (p.focusAreas) {
+        sections +=
+          '<section class="section section--alt"><div class="container">' +
+          '<div class="section-head reveal"><span class="eyebrow">What it covers</span>' +
+          "<h2>Key focus areas</h2>" +
+          '<p class="lead">The core areas that make up ' + esc(p.name) + ".</p></div>" +
+          focusGridHTML(p.focusAreas) +
+          "</div></section>";
+      }
+      if (p.approach) {
+        sections +=
+          '<section class="section"><div class="container">' +
+          '<div class="section-head reveal"><span class="eyebrow">Our Approach</span>' +
+          "<h2>How we deliver " + esc(p.name) + "</h2>" +
+          '<p class="lead">A structured, repeatable path from framing to impact.</p></div>' +
+          stepsHTML(p.approach) +
+          "</div></section>";
+      }
+      sections +=
+        '<section class="section section--alt"><div class="container">' +
+        '<div class="section-head reveal"><span class="eyebrow">Accelerators</span>' +
+        "<h2>Assets that speed up delivery</h2>" +
+        '<p class="lead">Reusable frameworks, models, and tools for this pillar. Each is being built into a working asset over time — click any card to learn more.</p></div>' +
+        accelGridHTML(p.accelerators) +
         "</div></section>";
+      body = sections;
     }
 
-    var accels = (p.accelerators || [])
-      .map(function (a) {
-        return accelCardHTML(p, a);
-      })
-      .join("");
-
     mount.innerHTML =
-      /* Page hero */
       '<header class="page-hero" style="--pillar-glow:' + esc(p.glow) + '">' +
       '<div class="container">' +
       '<nav class="breadcrumbs"><a href="' + ROOT + 'index.html">Home</a><span class="sep">/</span>' +
@@ -355,30 +440,12 @@
       '<section class="section"><div class="container">' +
       '<div class="grid-2">' +
       '<div class="reveal"><span class="eyebrow">Overview</span>' +
-      "<h2>What this pillar covers</h2><p class=\"lead\">" + esc(p.description) + "</p></div>" +
+      '<h2>What this pillar covers</h2><p class="lead">' + esc(p.description) + "</p></div>" +
       '<div class="panel panel--tint reveal"><h3 style="margin-bottom:18px">Outcomes you can expect</h3>' +
       '<ul class="feature-list">' + outcomes + "</ul></div>" +
       "</div></div></section>" +
-      /* Focus areas (optional) */
-      focusSection +
-      /* Approach */
-      '<section class="section section--alt"><div class="container">' +
-      '<div class="section-head reveal"><span class="eyebrow">Our Approach</span>' +
-      "<h2>How we deliver " + esc(p.name) + "</h2>" +
-      '<p class="lead">A structured, repeatable path from framing to impact.</p></div>' +
-      '<div class="steps">' + approach + "</div>" +
-      "</div></section>" +
-      /* Accelerators */
-      '<section class="section"><div class="container">' +
-      '<div class="section-head reveal"><span class="eyebrow">Accelerators</span>' +
-      "<h2>Assets that speed up delivery</h2>" +
-      '<p class="lead">Reusable frameworks, models, and tools for this pillar. Each is being built into a working asset over time — click any card to learn more.</p></div>' +
-      '<div class="accel-grid">' + accels + "</div>" +
-      "</div></section>" +
-      /* CTA */
-      '<section class="section section--alt"><div class="container">' +
-      ctaBandHTML() +
-      "</div></section>";
+      body +
+      '<section class="section"><div class="container">' + ctaBandHTML() + "</div></section>";
 
     initReveal();
   }
@@ -395,6 +462,7 @@
       return;
     }
     var p = found.pillar,
+      sp = found.subPillar,
       a = found.accel;
     document.title = a.name + " — " + (SITE.brand.name || "AI Strategy");
 
@@ -409,7 +477,6 @@
       })
       .join("");
 
-    // "Roadmap" reflects that these are built over time
     var stageState = {
       planned: ["active", "", ""],
       progress: ["done", "active", ""],
@@ -422,6 +489,7 @@
       '<div class="container">' +
       '<nav class="breadcrumbs"><a href="' + ROOT + 'index.html">Home</a><span class="sep">/</span>' +
       '<a href="' + ROOT + "pillar.html?slug=" + esc(p.slug) + '">' + esc(p.name) + "</a>" +
+      (sp ? '<span class="sep">/</span><span>' + esc(sp.name) + "</span>" : "") +
       '<span class="sep">/</span><span>' + esc(a.name) + "</span></nav>" +
       '<div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:6px">' +
       '<span class="pill-tag" style="margin:0">' + esc(a.icon) + " Accelerator</span>" +
@@ -431,10 +499,9 @@
       '<p class="lead">' + esc(a.summary) + "</p>" +
       "</div></header>" +
       '<section class="section"><div class="container"><div class="grid-2">' +
-      /* Left: description + deliverables */
       '<div class="reveal">' +
       '<span class="eyebrow">What it is</span><h2>Overview</h2>' +
-      "<p class=\"lead\">" + esc(a.description) + "</p>" +
+      '<p class="lead">' + esc(a.description) + "</p>" +
       (deliverables
         ? '<h3 style="margin-top:32px">What you get</h3><ul class="feature-list">' + deliverables + "</ul>"
         : "") +
@@ -442,16 +509,15 @@
         ? '<h3 style="margin-top:32px">What we need from you</h3><ul class="feature-list">' + inputs + "</ul>"
         : "") +
       (a.status !== "available"
-        ? '<div class="callout"><p><strong>Status: ' +
-          esc(STATUS[a.status].label) +
+        ? '<div class="callout"><p><strong>Status: ' + esc(STATUS[a.status].label) +
           ".</strong> This accelerator is part of our roadmap of working assets and is being built out over time. Reach out if you'd like to shape it or pilot an early version.</p></div>"
         : "") +
       "</div>" +
-      /* Right: meta + roadmap */
       '<div class="reveal">' +
       '<div class="panel" style="margin-bottom:22px"><h3 style="margin-bottom:12px">At a glance</h3>' +
       '<ul class="meta-list">' +
       '<li><span class="k">Pillar</span><span class="v"><a href="' + ROOT + "pillar.html?slug=" + esc(p.slug) + '">' + esc(p.name) + "</a></span></li>" +
+      (sp ? '<li><span class="k">Area</span><span class="v">' + esc(sp.name) + "</span></li>" : "") +
       '<li><span class="k">Status</span><span class="v">' + esc(STATUS[a.status].label) + "</span></li>" +
       (a.effort ? '<li><span class="k">Typical effort</span><span class="v">' + esc(a.effort) + "</span></li>" : "") +
       '<li><span class="k">Format</span><span class="v">Reusable asset</span></li>' +
@@ -464,28 +530,23 @@
       "</ul></div>" +
       "</div>" +
       "</div></div></section>" +
-      /* Related accelerators */
-      relatedAccelHTML(p, a) +
+      relatedAccelHTML(sp || p, a) +
       '<section class="section"><div class="container">' + ctaBandHTML() + "</div></section>";
 
     initReveal();
   }
 
-  function relatedAccelHTML(p, current) {
-    var others = (p.accelerators || []).filter(function (a) {
+  function relatedAccelHTML(owner, current) {
+    var others = (owner.accelerators || []).filter(function (a) {
       return a.slug !== current.slug;
     });
     if (!others.length) return "";
-    var cards = others
-      .map(function (a) {
-        return accelCardHTML(p, a);
-      })
-      .join("");
     return (
       '<section class="section section--alt"><div class="container">' +
       '<div class="section-head reveal"><span class="eyebrow">Keep exploring</span>' +
-      "<h2>More " + esc(p.name) + " accelerators</h2></div>" +
-      '<div class="accel-grid">' + cards + "</div></div></section>"
+      "<h2>More " + esc(owner.name) + " accelerators</h2></div>" +
+      accelGridHTML(others) +
+      "</div></section>"
     );
   }
 

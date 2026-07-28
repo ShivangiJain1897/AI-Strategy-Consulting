@@ -46,6 +46,14 @@ window.SITE = {
         "Quantified value hypotheses with baseline and target metrics",
         "Executive alignment on ambition, scope, and sequencing",
       ],
+      /* The business value this pillar creates — one crisp line each */
+      businessValue: [
+        { title: "Solving the right problem", text: "Focus effort where it actually moves the business." },
+        { title: "End-to-end efficiency", text: "Improve the whole value chain, not just isolated pieces." },
+        { title: "Transformative use cases", text: "Shape bold, high-impact bets — not incremental tweaks." },
+        { title: "Business alignment", text: "Every opportunity ties back to a strategic goal." },
+        { title: "Outcome-driven", text: "Anchored on measurable results from day one." },
+      ],
       /* The buckets / key aspects this pillar is made up of */
       focusAreas: [
         {
@@ -222,6 +230,14 @@ window.SITE = {
         "Composable architecture and capabilities reused across use cases",
         "A robust data foundation and fit-for-purpose AI platform",
       ],
+      /* The business value this pillar creates — one crisp line each */
+      businessValue: [
+        { title: "Faster delivery", text: "Ship AI in weeks by reusing proven building blocks." },
+        { title: "Cost effectiveness", text: "Engineer the economics so scale stays affordable." },
+        { title: "Reuse over rebuild", text: "Assemble from components instead of starting over." },
+        { title: "Scalable", text: "Architecture built to grow across many use cases." },
+        { title: "Skilled intelligence", text: "Embed AI skill and rigor into how you build." },
+      ],
       /* The buckets / key aspects this pillar is made up of */
       focusAreas: [
         {
@@ -348,84 +364,200 @@ window.SITE = {
       tint: "#fdf1dd",
       glow: "rgba(245,166,35,0.26)",
       summary:
-        "Governance spans two intertwined arms: the Enterprise Governance Program that keeps AI initiatives aligned, controlled, and compliant, and the AI Competency Center (AICC) that builds durable internal capability, standards, and reusable assets.",
+        "Governance has two intertwined arms: AI Program Governance, which keeps the AI portfolio aligned, visible, and moving, and the AI Competency Center (AICC), which builds durable internal capability, literacy, and adoption.",
       description:
-        "AI at scale needs more than projects — it needs an operating model. This pillar establishes an enterprise governance program to steer the portfolio with the right decision rights and controls, and stands up an AI Competency Center (AICC) as the home for standards, reusable assets, talent, and responsible-AI practices. Together they turn AI from a series of experiments into a governed, compounding capability.",
+        "AI at scale needs more than projects — it needs an operating model. This pillar runs on two arms. AI Program Governance provides the program management, stakeholder alignment, and change management to steer the portfolio. The AI Competency Center (AICC) builds the literacy, operational excellence, and adoption that make AI a lasting internal capability.",
       outcomes: [
-        "A clear governance operating model and decision rights",
-        "A functioning AI Competency Center (AICC)",
-        "Responsible-AI guardrails embedded in delivery",
+        "Clear ownership, decision rights, and portfolio visibility",
+        "A workforce building AI literacy and adoption",
+        "A central home for reusable AI assets and standards",
       ],
-      /* The two arms that make up Governance */
-      focusAreas: [
+      /* Governance is delivered through two sub-areas, each with its own
+         focus areas, approach, business value, and accelerators. */
+      subPillars: [
         {
-          name: "Enterprise Governance Program",
+          name: "AI Program Governance",
+          slug: "ai-program-governance",
           icon: "🏛️",
-          text: "Establish the bodies, decision rights, standards, and controls that keep AI initiatives aligned, funded, and compliant across the enterprise.",
+          summary:
+            "Keep the AI portfolio aligned, visible, and moving — through disciplined program management, stakeholder alignment, and change management.",
+          businessValue: [
+            { title: "Clear ownership", text: "Everyone knows who decides and who delivers." },
+            { title: "Unified visibility", text: "One clear view across the whole AI portfolio." },
+            { title: "Efficiency at scale", text: "Standard governance that speeds delivery, not slows it." },
+            { title: "Ease of usability", text: "Lightweight governance teams actually want to use." },
+          ],
+          focusAreas: [
+            { name: "Change Management", icon: "🔀", text: "Bring people along so AI change sticks and adoption follows." },
+            { name: "Stakeholder Alignment", icon: "🤝", text: "Keep sponsors and stakeholders aligned on goals and trade-offs." },
+            { name: "Visibility & Communication", icon: "📣", text: "Make progress, decisions, and value visible to everyone who needs it." },
+          ],
+          approach: [
+            { title: "Anchor to enterprise goals", text: "Tie the AI portfolio to the outcomes leadership cares about." },
+            { title: "Run disciplined program management", text: "Apply proven program cadences, controls, and rigor." },
+            { title: "Align stakeholders & sponsors", text: "Build and sustain sponsorship and cross-functional alignment." },
+            { title: "Make the portfolio visible", text: "Give everyone a clear, current view of status and value." },
+          ],
+          accelerators: [
+            {
+              slug: "governance-operating-model",
+              name: "Governance Operating Model",
+              icon: "🏛️",
+              status: "available",
+              summary: "The bodies, decision rights, and cadences that steer the AI portfolio.",
+              description:
+                "Defines the governance structure — forums, roles, decision rights, and cadences — that keeps AI initiatives aligned, funded, and accountable.",
+              deliverables: ["Governance structure & forums", "Decision rights & RACI", "Cadence & stage gates"],
+              inputs: ["Portfolio overview", "Existing PMO practices"],
+              effort: "2–3 weeks",
+            },
+            {
+              slug: "raid-log",
+              name: "RAID Log",
+              icon: "🧾",
+              status: "available",
+              summary: "A living log of risks, assumptions, issues, and dependencies.",
+              description:
+                "A structured RAID (risks, assumptions, issues, dependencies) log and review cadence to surface and manage what could derail AI initiatives.",
+              deliverables: ["RAID log template", "Review cadence", "Escalation triggers"],
+              inputs: ["Initiative list", "Delivery leads"],
+              effort: "~1 week",
+            },
+            {
+              slug: "decision-matrix",
+              name: "Decision Matrix",
+              icon: "🧮",
+              status: "planned",
+              summary: "A clear map of who decides what across the AI program.",
+              description:
+                "A decision-rights matrix that clarifies which body or role owns each type of decision — removing bottlenecks and ambiguity.",
+              deliverables: ["Decision-rights matrix", "Escalation paths"],
+              inputs: ["Governance structure", "Stakeholder map"],
+              effort: "~1 week",
+            },
+            {
+              slug: "comms-matrix",
+              name: "Comms Matrix",
+              icon: "📣",
+              status: "planned",
+              summary: "A plan for who hears what, when, and how across the program.",
+              description:
+                "A communications matrix mapping audiences, messages, channels, and cadence so the right people stay informed and engaged.",
+              deliverables: ["Comms matrix", "Audience & channel map", "Message calendar"],
+              inputs: ["Stakeholder map", "Program milestones"],
+              effort: "~1 week",
+            },
+            {
+              slug: "change-management-toolkit",
+              name: "Change Management Toolkit",
+              icon: "🔧",
+              status: "progress",
+              summary: "Tools to drive adoption and manage the people side of AI change.",
+              description:
+                "A toolkit of change-management artifacts — impact assessments, adoption plans, and readiness checks — to bring people along and make AI change stick.",
+              deliverables: ["Change impact assessment", "Adoption & readiness plan", "Resistance management guide"],
+              inputs: ["Impacted groups", "Change leads"],
+              effort: "2–3 weeks",
+            },
+            {
+              slug: "initiative-stakeholder-mapping",
+              name: "Initiative & Stakeholder Mapping Templates",
+              icon: "🗺️",
+              status: "planned",
+              summary: "Templates to map initiatives to stakeholders, owners, and impact.",
+              description:
+                "Templates that map each AI initiative to its stakeholders, owners, dependencies, and impact — making ownership and relationships explicit.",
+              deliverables: ["Initiative map", "Stakeholder map", "Ownership matrix"],
+              inputs: ["Initiative list", "Organizational context"],
+              effort: "~1 week",
+            },
+            {
+              slug: "status-reporting-templates",
+              name: "Status Reporting Templates",
+              icon: "📊",
+              status: "progress",
+              summary: "Standard templates for clear, consistent portfolio status reporting.",
+              description:
+                "Ready-to-use status and portfolio reporting templates that make progress, risks, and value visible to leadership at a glance.",
+              deliverables: ["Initiative status template", "Portfolio dashboard", "Exec summary format"],
+              inputs: ["Reporting cadence", "Portfolio metrics"],
+              effort: "~1 week",
+            },
+          ],
         },
         {
           name: "AI Competency Center (AICC)",
+          slug: "ai-competency-center",
           icon: "🎓",
-          text: "Build a central home for AI talent, reusable assets, and standards that scales capability and consistency across teams.",
-        },
-      ],
-      approach: [
-        {
-          title: "Establish",
-          text: "Define governance bodies, decision rights, and the AICC operating model.",
-        },
-        {
-          title: "Standardize",
-          text: "Set standards, reusable assets, and responsible-AI policies teams can adopt.",
-        },
-        {
-          title: "Enable",
-          text: "Build skills, playbooks, and support so teams deliver consistently.",
-        },
-        {
-          title: "Assure",
-          text: "Monitor risk, compliance, and value realization across the portfolio.",
-        },
-      ],
-      accelerators: [
-        {
-          slug: "aicc-operating-model",
-          name: "AICC Operating Model",
-          icon: "🏛️",
-          status: "available",
           summary:
-            "A blueprint for standing up and running an AI Competency Center.",
-          description:
-            "Defines the mandate, structure, roles, funding model, and service catalog of an AI Competency Center — the organizational engine that scales AI capability across the enterprise.",
-          deliverables: ["AICC operating model", "Roles & RACI", "Service catalog & funding model"],
-          inputs: ["Org context & ambition", "Existing capability inventory", "Stakeholder input"],
-          effort: "2–4 weeks",
-        },
-        {
-          slug: "responsible-ai-framework",
-          name: "Responsible AI Framework",
-          icon: "⚖️",
-          status: "progress",
-          summary:
-            "A practical policy and control framework for trustworthy, compliant AI.",
-          description:
-            "Translates responsible-AI principles into concrete policies, review gates, and controls that fit into delivery — covering fairness, transparency, security, and regulatory alignment.",
-          deliverables: ["Responsible-AI policy set", "Risk tiering & review gates", "Control checklist"],
-          inputs: ["Regulatory context", "Risk appetite", "Existing policies"],
-          effort: "2–4 weeks",
-        },
-        {
-          slug: "program-governance-playbook",
-          name: "Program Governance Playbook",
-          icon: "📋",
-          status: "planned",
-          summary:
-            "A playbook for steering the AI portfolio with the right cadences and metrics.",
-          description:
-            "Provides the governance cadences, stage gates, reporting, and escalation paths to keep a portfolio of AI initiatives aligned, funded, and delivering measurable value.",
-          deliverables: ["Governance cadence & stage gates", "Portfolio dashboard template", "Escalation framework"],
-          inputs: ["Portfolio overview", "Existing PMO practices", "Leadership cadence"],
-          effort: "1–3 weeks",
+            "Build lasting internal AI capability — literacy, operational excellence, and adoption — through a central competency center.",
+          businessValue: [
+            { title: "Thought leadership", text: "A recognized internal center of AI expertise." },
+            { title: "Upskilling workforce", text: "Build AI fluency across every level of the organization." },
+            { title: "Accelerated adoption", text: "Turn capability into real, widespread usage." },
+            { title: "Innovation pipeline", text: "A steady flow of new AI ideas and reusable assets." },
+          ],
+          focusAreas: [
+            { name: "AI Literacy", icon: "📚", text: "Raise AI understanding and skills across roles and levels." },
+            { name: "ADLC Operationalization", icon: "🔄", text: "Embed the AI Development Life Cycle as the way teams build." },
+            { name: "AI Adoption", icon: "🚀", text: "Drive real, sustained adoption of AI in day-to-day work." },
+          ],
+          approach: [
+            { title: "Activate the AICC", text: "Stand up the competency center, its mandate, and its team." },
+            { title: "Literacy assessment & enablement", text: "Assess AI literacy and close gaps with targeted enablement." },
+            { title: "AI adoption playbook", text: "Give teams a clear playbook to adopt AI in their work." },
+            { title: "Asset creation & communication", text: "Build reusable assets and communicate wins to sustain momentum." },
+          ],
+          accelerators: [
+            {
+              slug: "aicc-operating-model",
+              name: "AICC Operating Model",
+              icon: "🏛️",
+              status: "available",
+              summary: "A blueprint for standing up and running an AI Competency Center.",
+              description:
+                "Defines the mandate, structure, roles, funding model, and service catalog of an AI Competency Center — the organizational engine that scales AI capability across the enterprise.",
+              deliverables: ["AICC operating model", "Roles & RACI", "Service catalog & funding model"],
+              inputs: ["Org context & ambition", "Existing capability inventory", "Stakeholder input"],
+              effort: "2–4 weeks",
+            },
+            {
+              slug: "ai-literacy-enablement",
+              name: "AI Literacy Enablement",
+              icon: "📚",
+              status: "progress",
+              summary: "Assessment and training to build AI literacy across the workforce.",
+              description:
+                "A structured program to assess AI literacy by role and deliver targeted enablement — from executive awareness to hands-on practitioner skills.",
+              deliverables: ["Literacy assessment", "Role-based learning paths", "Enablement content"],
+              inputs: ["Role / persona map", "Current skill baseline"],
+              effort: "3–5 weeks",
+            },
+            {
+              slug: "technology-placement-framework",
+              name: "Technology Placement Framework",
+              icon: "🧭",
+              status: "planned",
+              summary: "Guidance on where and how to place AI technology across teams.",
+              description:
+                "A framework to decide which AI tools and platforms belong where across the organization — matching capabilities to teams, use cases, and maturity.",
+              deliverables: ["Placement framework", "Tool-to-team mapping", "Rollout guidance"],
+              inputs: ["Tooling landscape", "Team maturity", "Use-case map"],
+              effort: "1–2 weeks",
+            },
+            {
+              slug: "hackathon-playbook",
+              name: "Hackathon Playbook",
+              icon: "💡",
+              status: "planned",
+              summary: "A playbook to run AI hackathons that spark adoption and ideas.",
+              description:
+                "An end-to-end playbook for running AI hackathons — from framing challenges to judging and follow-through — to build skills, surface ideas, and accelerate adoption.",
+              deliverables: ["Hackathon run-book", "Challenge & judging templates", "Follow-through plan"],
+              inputs: ["Target audience", "Candidate challenges"],
+              effort: "1–2 weeks",
+            },
+          ],
         },
       ],
     },
@@ -448,6 +580,41 @@ window.SITE = {
         "Clear tracking of promised vs. realized value",
         "A defensible view of AI portfolio ROI",
       ],
+      /* The business value this pillar creates — one crisp line each */
+      businessValue: [
+        { title: "Provable ROI", text: "Show the real return AI delivers, with evidence." },
+        { title: "Value-based prioritization", text: "Invest where the value is highest, first." },
+        { title: "Business alignment", text: "Tie every initiative to a business outcome." },
+        { title: "Outcome-driven", text: "Track realized results, not just activity." },
+      ],
+      /* The buckets / key aspects this pillar is made up of */
+      focusAreas: [
+        {
+          name: "AI Intake Redesign",
+          icon: "📥",
+          text: "Redesign how AI demand is captured, triaged, and funded.",
+        },
+        {
+          name: "Prioritization Model",
+          icon: "⚖️",
+          text: "Rank initiatives by value, feasibility, and strategic fit.",
+        },
+        {
+          name: "KPI Benchmarking & Tracking",
+          icon: "📊",
+          text: "Baseline and track the KPIs that prove AI's impact.",
+        },
+        {
+          name: "ROI Model",
+          icon: "💹",
+          text: "Model the return on each initiative and the portfolio.",
+        },
+        {
+          name: "Tokenomics",
+          icon: "🪙",
+          text: "Understand and manage the cost economics of AI and GenAI usage.",
+        },
+      ],
       approach: [
         {
           title: "Define value",
@@ -468,42 +635,81 @@ window.SITE = {
       ],
       accelerators: [
         {
-          slug: "value-feasibility-scoring",
-          name: "Value–Feasibility Scoring Model",
+          slug: "ai-intake-process-redesign",
+          name: "AI Intake Process Redesign",
+          icon: "📥",
+          status: "progress",
+          summary:
+            "A redesigned intake process to capture, triage, and fund AI demand.",
+          description:
+            "Redesigns how AI ideas and requests enter the portfolio — a clear intake, triage, and funding path so good ideas move fast and the portfolio stays focused.",
+          deliverables: ["Redesigned intake process", "Triage & scoring criteria", "Intake templates"],
+          inputs: ["Current intake process", "Demand sources"],
+          effort: "1–2 weeks",
+        },
+        {
+          slug: "prioritization-model",
+          name: "Prioritization Model",
           icon: "⚖️",
           status: "available",
           summary:
-            "A transparent multi-criteria model to score and rank AI initiatives.",
+            "A transparent model to prioritize AI initiatives by value and feasibility.",
           description:
-            "A configurable scoring model that rates each initiative on value, feasibility, and risk using agreed weights — producing a defensible, comparable ranking that stakeholders can trust.",
+            "A configurable, multi-criteria model that ranks initiatives on value, feasibility, and risk — producing a defensible prioritization stakeholders can trust.",
           deliverables: ["Weighted scoring model", "Ranked initiative list", "Prioritization matrix (2x2)"],
           inputs: ["Opportunity portfolio", "Agreed criteria & weights", "Stakeholder scoring input"],
           effort: "1–2 weeks",
         },
         {
-          slug: "ai-investment-roadmap",
-          name: "AI Investment Roadmap",
-          icon: "🗺️",
+          slug: "roi-model",
+          name: "ROI Model",
+          icon: "💹",
           status: "progress",
           summary:
-            "A sequenced, multi-horizon roadmap linking initiatives to value and investment.",
+            "A model to project and prove the return on AI initiatives.",
           description:
-            "Turns a prioritized portfolio into a phased roadmap across horizons — showing what gets built when, the dependencies, and the value expected at each stage.",
-          deliverables: ["Multi-horizon roadmap", "Dependency & capacity view", "Value realization timeline"],
-          inputs: ["Prioritized initiatives", "Capacity constraints", "Dependency map"],
+            "Projects costs, benefits, and returns for AI initiatives and the portfolio — giving finance and leadership a transparent basis for investment decisions.",
+          deliverables: ["ROI / NPV model", "Cost & benefit drivers", "Sensitivity analysis"],
+          inputs: ["Cost assumptions", "Benefit estimates", "Adoption curves"],
           effort: "1–2 weeks",
         },
         {
-          slug: "benefits-realization-tracker",
-          name: "Benefits Realization Tracker",
-          icon: "📥",
+          slug: "kpi-benchmarking-tracking",
+          name: "KPI Benchmarking & Tracking",
+          icon: "📊",
           status: "planned",
           summary:
-            "A tool to track promised vs. realized value across the AI portfolio.",
+            "Baseline and track the KPIs that prove AI is delivering value.",
           description:
-            "Keeps AI honest about value — tracking the benefits committed in the business case against what is actually realized, so leadership can course-correct and double down on what works.",
-          deliverables: ["Benefits tracking dashboard", "Value baseline vs. actuals", "Course-correction reporting"],
-          inputs: ["Business case metrics", "Live performance data", "Reporting cadence"],
+            "Establishes KPI baselines and a tracking mechanism to monitor realized value against targets across the AI portfolio.",
+          deliverables: ["KPI baseline & targets", "Tracking dashboard", "Reporting cadence"],
+          inputs: ["Business case metrics", "Live performance data"],
+          effort: "1–2 weeks",
+        },
+        {
+          slug: "tokenomics",
+          name: "Tokenomics",
+          icon: "🪙",
+          status: "planned",
+          summary:
+            "A model to understand and manage the cost economics of AI usage.",
+          description:
+            "Models the token- and usage-based cost economics of AI and GenAI solutions — so teams can forecast, optimize, and control run costs as they scale.",
+          deliverables: ["Token / usage cost model", "Cost drivers & levers", "Optimization guidance"],
+          inputs: ["Usage patterns", "Model & platform pricing"],
+          effort: "1–2 weeks",
+        },
+        {
+          slug: "tco-model",
+          name: "TCO Model",
+          icon: "🧮",
+          status: "planned",
+          summary:
+            "A total-cost-of-ownership model for AI solutions and platforms.",
+          description:
+            "A TCO model that captures the full cost of building, running, and scaling AI — infrastructure, platforms, people, and change — for honest value-versus-cost decisions.",
+          deliverables: ["TCO model", "Cost category breakdown", "Build / run cost view"],
+          inputs: ["Solution & platform scope", "Cost inputs"],
           effort: "1–2 weeks",
         },
       ],
