@@ -214,84 +214,126 @@ window.SITE = {
       tint: "#e3f8f6",
       glow: "rgba(23,201,193,0.28)",
       summary:
-        "Technology Value Delivery is how strategy becomes software. We design the architecture, prove value through rapid experimentation, and build the delivery muscle to scale AI safely and repeatably.",
+        "Technology Value Delivery is how strategy becomes working, scalable AI. We move teams from a traditional SDLC to an AI Development Life Cycle (ADLC), build reusable architecture and capabilities, lay a strong data foundation, and engineer the economics so value scales efficiently.",
       description:
-        "A great opportunity portfolio is worthless if delivery stalls. This pillar covers the technology foundations — data readiness, reference architecture, evaluation, and the engineering practices (MLOps / LLMOps) — that let you move from prototype to production with confidence. We favor proving value fast with thin slices, then hardening what works.",
+        "A great opportunity portfolio is worthless if delivery stalls. This pillar builds the technology engine for AI at scale: redesigning delivery around an AI Development Life Cycle (ADLC), establishing composable and reusable architecture and capability patterns, selecting the right AI platform, laying a robust data foundation, and standing up a governance and control tower — all engineered with the economics of scale in mind.",
       outcomes: [
-        "Reference architecture aligned to your stack and constraints",
-        "Working prototypes that de-risk the highest-value use cases",
-        "A repeatable path from experiment to production",
+        "A shift from SDLC to a repeatable AI Development Life Cycle (ADLC)",
+        "Composable architecture and capabilities reused across use cases",
+        "A robust data foundation and fit-for-purpose AI platform",
       ],
+      /* The buckets / key aspects this pillar is made up of */
+      focusAreas: [
+        {
+          name: "ADLC Process, Redesign & Value Models",
+          icon: "🔄",
+          text: "Redesign the delivery lifecycle from SDLC to an AI Development Life Cycle, with process redesign and value models built in.",
+        },
+        {
+          name: "Architecture & Capability Reuse",
+          icon: "♻️",
+          text: "Design composable architecture and reusable capabilities so the same building blocks serve many use cases.",
+        },
+        {
+          name: "AI Platform Selection",
+          icon: "🧰",
+          text: "Choose the right AI and GenAI platform for your stack, constraints, and ambition.",
+        },
+        {
+          name: "Data Foundation",
+          icon: "🗄️",
+          text: "Establish the data architecture, quality, and governance that reliable AI depends on.",
+        },
+        {
+          name: "Governance & Control Tower",
+          icon: "🗼",
+          text: "Stand up a control tower to monitor delivery, cost, risk, and performance across AI initiatives.",
+        },
+      ],
+      /* The four-step approach for this pillar */
       approach: [
         {
-          title: "Assess",
-          text: "Evaluate data, platform, and engineering readiness against target use cases.",
+          title: "Move from SDLC to ADLC",
+          text: "Redesign delivery around an AI Development Life Cycle built for data, models, and continuous iteration.",
         },
         {
-          title: "Architect",
-          text: "Design a fit-for-purpose reference architecture and evaluation strategy.",
+          title: "Build once, reuse everywhere",
+          text: "Establish composable architecture and capability patterns so new use cases assemble from proven building blocks.",
         },
         {
-          title: "Prototype",
-          text: "Build thin, high-value slices to prove feasibility and value quickly.",
+          title: "Lay the data foundation",
+          text: "Put in place the data architecture, quality, and governance that scalable AI depends on.",
         },
         {
-          title: "Industrialize",
-          text: "Harden, automate, and operationalize what works for reliable scaling.",
+          title: "Engineer the economics",
+          text: "Design for cost, performance, and reuse so value scales efficiently — not just technically.",
         },
       ],
       accelerators: [
         {
-          slug: "data-readiness-assessment",
-          name: "Data Readiness Assessment",
-          icon: "🗂️",
-          status: "available",
-          summary:
-            "A rapid diagnostic of whether your data can support the AI use cases you want to build.",
-          description:
-            "Evaluates availability, quality, access, and governance of the data behind priority use cases, and produces a clear gap analysis and remediation plan so data doesn't become a mid-project surprise.",
-          deliverables: ["Data readiness scorecard", "Gap analysis & remediation plan", "Use-case feasibility rating"],
-          inputs: ["Priority use cases", "Data source inventory", "Data owner access"],
-          effort: "1–2 weeks",
-        },
-        {
-          slug: "reference-architecture-blueprint",
-          name: "Reference Architecture Blueprint",
-          icon: "🏗️",
+          slug: "adlc-agents-accelerators",
+          name: "ADLC Agents & Accelerators",
+          icon: "🤖",
           status: "progress",
           summary:
-            "A modular blueprint for building and scaling AI and GenAI solutions on your stack.",
+            "AI agents and tooling that automate and speed up the AI Development Life Cycle.",
           description:
-            "A vendor-aware reference architecture covering data pipelines, model serving, orchestration, retrieval, guardrails, and observability — adaptable to cloud and platform choices, and designed for security and scale from day one.",
-          deliverables: ["Reference architecture diagrams", "Component & pattern catalog", "Build vs. buy guidance"],
-          inputs: ["Current tech landscape", "Security & compliance constraints", "Target use-case patterns"],
+            "A growing toolkit of agents and accelerators mapped to each stage of the AI Development Life Cycle (ADLC) — from discovery and data prep to build, evaluation, and deployment — so teams deliver AI faster and more consistently than a hand-crafted SDLC allows.",
+          deliverables: ["ADLC stage-by-stage tooling map", "Reusable agent templates", "Delivery automation playbook"],
+          inputs: ["Current delivery lifecycle", "Tooling landscape", "Target use-case types"],
+          effort: "3–6 weeks",
+        },
+        {
+          slug: "composable-architecture-blueprint",
+          name: "Composable Architecture Blueprint",
+          icon: "🧱",
+          status: "progress",
+          summary:
+            "A modular, composable reference architecture designed for reuse across AI use cases.",
+          description:
+            "A blueprint that breaks the AI stack into composable building blocks — data, retrieval, models, orchestration, guardrails, and observability — so new use cases assemble from proven components instead of starting from scratch.",
+          deliverables: ["Composable architecture diagrams", "Reusable component catalog", "Integration & extension guidelines"],
+          inputs: ["Current tech landscape", "Platform & security constraints", "Target use-case patterns"],
           effort: "2–3 weeks",
         },
         {
-          slug: "rapid-poc-framework",
-          name: "Rapid PoC Framework",
-          icon: "🚀",
-          status: "progress",
+          slug: "capability-patterns-archetypes",
+          name: "Capability Patterns & Archetypes",
+          icon: "🧩",
+          status: "planned",
           summary:
-            "A repeatable framework for standing up value-proving proofs of concept in weeks.",
+            "A library of common AI capability patterns and archetypes to accelerate design.",
           description:
-            "Provides the scaffolding, guardrails, and success criteria to run disciplined proofs of concept — so experiments are fast, comparable, and produce a clear go / no-go decision.",
-          deliverables: ["PoC scaffolding & templates", "Success-criteria framework", "Go/no-go decision pack"],
-          inputs: ["Prioritized use case", "Access to representative data", "SME time"],
+            "Codifies recurring AI solution patterns (e.g., RAG assistant, document extraction, agentic workflow, forecasting) into reusable archetypes with reference designs — so teams pick a proven pattern rather than reinventing the approach for every use case.",
+          deliverables: ["Capability pattern library", "Per-archetype reference design", "Pattern selection guidance"],
+          inputs: ["Use-case portfolio", "Existing solution inventory"],
           effort: "2–4 weeks",
         },
         {
-          slug: "model-evaluation-harness",
-          name: "Model Evaluation Harness",
-          icon: "🧪",
+          slug: "build-vs-buy-framework",
+          name: "Build vs. Buy Framework",
+          icon: "⚖️",
           status: "planned",
           summary:
-            "A structured harness to evaluate model and prompt quality, safety, and cost.",
+            "A structured framework to decide when to build, buy, or partner for AI capabilities.",
           description:
-            "Standardizes how you measure AI system performance across accuracy, safety, latency, and cost — enabling objective comparison of models, prompts, and configurations before you commit.",
-          deliverables: ["Evaluation dataset & rubric", "Automated scoring pipeline", "Model comparison report"],
-          inputs: ["Target task definition", "Representative test cases", "Quality thresholds"],
-          effort: "1–3 weeks",
+            "A decision framework and scoring model that weighs cost, differentiation, time-to-value, and risk to guide build-versus-buy-versus-partner choices across the AI stack — keeping investment focused on what truly differentiates.",
+          deliverables: ["Build/buy/partner decision framework", "Weighted scoring model", "Recommendation summary"],
+          inputs: ["Capability requirements", "Vendor landscape", "Cost & constraint inputs"],
+          effort: "1–2 weeks",
+        },
+        {
+          slug: "data-foundation-architecture",
+          name: "Data Foundation Architecture",
+          icon: "🏗️",
+          status: "planned",
+          summary:
+            "A reference architecture for the data foundation that AI at scale depends on.",
+          description:
+            "Defines the data architecture — ingestion, storage, quality, governance, and retrieval / vector layers — that reliable, scalable AI requires, aligned to your platform and ready to serve multiple use cases.",
+          deliverables: ["Data foundation architecture", "Data quality & governance model", "Retrieval / vector layer design"],
+          inputs: ["Data landscape & sources", "Platform choices", "Priority use-case data needs"],
+          effort: "2–4 weeks",
         },
       ],
     },
