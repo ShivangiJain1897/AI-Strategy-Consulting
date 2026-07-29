@@ -34,9 +34,9 @@ window.SITE = {
       name: "Business Value Discovery",
       short: "Find where AI creates real, measurable business value.",
       icon: "🎯",
-      color: "#4f60ff",
-      tint: "#eef1fb",
-      glow: "rgba(79,96,255,0.28)",
+      color: "#7c5cff",
+      tint: "#efeaff",
+      glow: "rgba(124,92,255,0.38)",
       summary:
         "We start with the business, not the technology. Business Value Discovery uncovers the highest-impact opportunities for AI across your value chain and translates them into a prioritized, evidence-backed opportunity portfolio.",
       description:
@@ -247,9 +247,9 @@ window.SITE = {
       name: "Technology Value Delivery",
       short: "Turn prioritized opportunities into working, scalable AI.",
       icon: "⚙️",
-      color: "#17c9c1",
-      tint: "#e3f8f6",
-      glow: "rgba(23,201,193,0.28)",
+      color: "#12c9e0",
+      tint: "#defafd",
+      glow: "rgba(18,201,224,0.36)",
       summary:
         "Technology Value Delivery is how strategy becomes working, scalable AI. We move teams from a traditional SDLC to an AI Development Life Cycle (ADLC), build reusable architecture and capabilities, lay a strong data foundation, and engineer the economics so value scales efficiently.",
       description:
@@ -389,9 +389,9 @@ window.SITE = {
       name: "Governance",
       short: "Govern AI responsibly and build lasting internal capability.",
       icon: "🛡️",
-      color: "#f5a623",
-      tint: "#fdf1dd",
-      glow: "rgba(245,166,35,0.26)",
+      color: "#ff7a45",
+      tint: "#fff0e7",
+      glow: "rgba(255,122,69,0.34)",
       summary:
         "Governance has two intertwined arms: AI Program Governance, which keeps the AI portfolio aligned, visible, and moving, and the AI Competency Center (AICC), which builds durable internal capability, literacy, and adoption.",
       description:
@@ -597,9 +597,9 @@ window.SITE = {
       name: "Value Realization & Economics",
       short: "Prioritize, capture, and prove the economic value AI delivers.",
       icon: "📈",
-      color: "#8b5cf6",
-      tint: "#f0ebfe",
-      glow: "rgba(139,92,246,0.26)",
+      color: "#ff4fd8",
+      tint: "#ffe6f8",
+      glow: "rgba(255,79,216,0.34)",
       summary:
         "Value Realization & Economics makes AI accountable for outcomes. It brings economic discipline to prioritize investment, track promised versus realized value, and prove the return on the AI portfolio.",
       description:
